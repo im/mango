@@ -4,7 +4,7 @@ const ncovUrl = 'https://api.tianapi.com/txapi/ncov/index?key=45fa3cbde8554285c1
 const ncovcityUrl = 'https://api.tianapi.com/txapi/ncovcity/index?key=45fa3cbde8554285c1677e2ecc3168fd'
 Page({
     data: {
-        navActive: 'map',
+        navActive: 'broadcast',
         navs: [{
                 name: '疫情地图',
                 value: 'map'
@@ -13,10 +13,10 @@ Page({
                 name: '实时播报',
                 value: 'broadcast'
             },
-            {
-                name: '谣言',
-                value: 'rumour'
-            }
+            // {
+            //     name: '谣言',
+            //     value: 'rumour'
+            // }
         ],
         case: [],
         news: [],
@@ -25,10 +25,19 @@ Page({
         durationTime: '',
         ncovcity: [],
         showCitys: {},
-        loading: false
-    },
-    isShowCity(city) {
-        console.log('city: ', city);
+        loading: false,
+        currentIndex: 1,
+        swiperMap: {
+            map: 0,
+            broadcast: 1,
+            rumour: 2
+        },
+        swiperMapOr: {
+            0: 'map',
+            1: 'broadcast',
+            2: 'rumour'
+        },
+        clientHeight: 0
     },
     handleShowCity(e) {
         const city = e.currentTarget.dataset.city;
@@ -72,6 +81,11 @@ Page({
             url: ncovUrl,
             success(res) {
                 const data = res.data.newslist[0] || {};
+                (data.news || []).forEach(item => {
+                    item.pubDate = moment(new Date(item.pubDate)).format(
+                        'YYYY-MM-DD HH:mm:ss'
+                    ) 
+                })
                 self.setData({
                     case: data.case || [],
                     news: data.news || [],
@@ -108,16 +122,37 @@ Page({
             showCitys: cityJson
         })
     },
+    getClientHeight() {
+        const self = this;
+        wx.getSystemInfo({
+            success(res) {
+                self.setData({
+                    clientHeight: (res.windowHeight * 2) - 100
+                })
+            }
+        })
+    },
+    swiperChange (e) {
+        const current = e.detail.current;
+        this.setData({
+            navActive: this.data.swiperMapOr[current]
+        })
+        
+    }, 
     onLoad() {
         wx.showLoading({
             title: '加载中...',
         })
+        this.getClientHeight();
         this.getNcov();
         this.getNcovCity();
-
     },
     onPullDownRefresh() {
         this.getNcov();
         this.getNcovCity('downRefresh')
+    },
+    formatTimestamp (item) {
+        console.log('item: ', item);
+
     }
 })

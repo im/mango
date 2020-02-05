@@ -1,7 +1,7 @@
 .nav {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 40rpx;
+    padding-bottom: 10rpx;
 }
 
 .nav text {
@@ -17,12 +17,13 @@
     border-bottom: 5rpx solid #409EFF
 }
 
+
 .header {
     padding: 0 20rpx;
     margin-bottom: 30rpx;
 }
 
-.title {
+.header .title {
     display: block;
     font-size: 50rpx;
     line-height: 50rpx;
@@ -208,10 +209,79 @@
     position: absolute;
     left: 16rpx;
     top: 25rpx;
-    border-color: transparent transparent transparent #222;
+    border-color: transparent transparent transparent rgba(144, 147, 153, 1);
 }
 
 .city-list-parent .triangle.down {
     top: 35rpx;
-    border-color: #222 transparent transparent transparent;
+    border-color: rgba(144, 147, 153, 1) transparent transparent transparent;
+}
+
+.timeline-box {
+    display: flex;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+}
+
+.timeline-box .left {
+    margin-right: 20rpx;
+    width: 30rpx;
+}
+
+.timeline-box .right {
+    width: 100%;
+    height: 100%;
+}
+
+.timeline-box .time {
+    display: block;
+    font-size: 26rpx;
+    color: #909399;
+    margin-bottom: 20rpx;
+}
+
+.timeline-box .dot{
+    display: block;
+    width: 30rpx;
+    height: 30rpx;
+    background: #E4E7ED;
+    border-radius: 50%;
+}
+.timeline-box .line{
+    display: block;
+    width: 6rpx;
+    height: 100%;
+    margin: 0 auto;
+    background: #E4E7ED;
+}
+
+.content-box {
+    height: 100%;
+    width: calc(100% - 40rpx);
+    border: 1px solid #EBEEF5;
+    background-color: #FFF;
+    color: #303133;
+    transition: .3s;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    border-radius: 4rpx;
+    padding: 15rpx 20rpx;
+}
+.content-box .title {
+    font-size: 35rpx;
+    font-weight: bold;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 20rpx;
+}
+.content {
+    display: block;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    margin-bottom: 30rpx;
+}
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    color: #808080;
+    font-size: 25rpx;
 }

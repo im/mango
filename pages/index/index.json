@@ -1,5 +1,6 @@
 {
-  "usingComponents": {},
-  "backgroundTextStyle": "dark",
-  "enablePullDownRefresh": true
+    "navigationBarTitleText": "全国疫情状态",
+    "usingComponents": {},
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
 }
