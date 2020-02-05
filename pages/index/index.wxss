@@ -1,21 +1,217 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40rpx;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.nav text {
+    flex: 1;
+    font-size: 30rpx;
+    text-align: center;
+    padding: 15rpx 0;
+
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.nav text.active {
+    color: #409EFF;
+    border-bottom: 5rpx solid #409EFF
 }
 
-.usermotto {
-  margin-top: 200px;
+.header {
+    padding: 0 20rpx;
+    margin-bottom: 30rpx;
+}
+
+.title {
+    display: block;
+    font-size: 50rpx;
+    line-height: 50rpx;
+    margin-top: 30rpx;
+}
+
+.update {
+    font-size: 28rpx;
+    color: #b6b6b6;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+    padding: 0 10rpx;
+    margin-bottom: 30rpx;
+}
+
+
+
+.info .item {
+    width: 25%;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 10rpx;
+}
+
+.info .item.danger {
+    color: rgb(245, 108, 108);
+    background: rgba(245, 108, 108, 0.1);
+}
+
+.info .item.danger .add {
+    background: rgba(245, 108, 108, 0.1);
+}
+
+.info .item.danger .text {
+    background: rgba(245, 108, 108, 0.2);
+}
+
+.info .item.warning {
+    color: rgb(230, 162, 60);
+    background: rgba(230, 162, 60, 0.1);
+}
+
+.info .item.warning .add {
+    background: rgba(230, 162, 60, 0.1);
+}
+
+.info .item.warning .text {
+    background: rgba(230, 162, 60, 0.2);
+}
+
+.info .item.dead {
+    color: rgb(144, 147, 153);
+    background: rgba(144, 147, 153, 0.1);
+}
+
+.info .item.dead .add {
+    background: rgba(144, 147, 153, 0.1);
+}
+
+.info .item.dead .text {
+    background: rgba(144, 147, 153, 0.2);
+}
+
+.info .item.success {
+    color: rgb(103, 194, 58);
+    background: rgba(103, 194, 58, 0.1);
+}
+
+.info .item.success .add {
+    background: rgba(103, 194, 58, 0.1);
+}
+
+.info .item.success .text {
+    background: rgba(103, 194, 58, 0.2);
+}
+
+.info text {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.add {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.num {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.text {
+    font-size: 12px;
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.map {
+    margin-bottom: 30rpx;
+}
+.map-img {
+    width: 100%;
+}
+
+.city-list-header {
+    display: flex;
+}
+
+.city-list-header text {
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+}
+
+.city-list-header text.city {
+    background: #e7e6f6;
+    width: 35%;
+}
+
+.city-list-header text.danger {
+    background: rgba(245, 108, 108, 0.2);
+    width: 21%;
+}
+
+.city-list-header text.dead {
+    background: rgba(144, 147, 153, 0.2);
+    width: 22%;
+}
+
+.city-list-header text.success {
+    background: rgba(103, 194, 58, 0.2);
+    width: 22%;
+}
+
+.city-list-parent {
+    display: flex;
+}
+
+.city-list-parent.parent {
+    background: #fafafa;
+}
+
+.city-list-parent text {
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+}
+
+.city-list-parent text.city {
+    width: 35%;
+    position: relative;
+}
+
+.city-list-parent text.danger {
+    width: 21%;
+}
+
+.city-list-parent text.dead {
+    width: 22%;
+}
+
+.city-list-parent text.success {
+    width: 22%;
+}
+
+.city-list-parent .triangle {
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: 15rpx;
+    line-height: 0;
+    border-style: solid;
+    position: absolute;
+    left: 16rpx;
+    top: 25rpx;
+    border-color: transparent transparent transparent #222;
+}
+
+.city-list-parent .triangle.down {
+    top: 35rpx;
+    border-color: #222 transparent transparent transparent;
 }

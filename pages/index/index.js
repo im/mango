@@ -1,54 +1,123 @@
-//index.js
-//获取应用实例
 const app = getApp()
-
+const moment = require('../../utils/moment-with-locales');
+const ncovUrl = 'https://api.tianapi.com/txapi/ncov/index?key=45fa3cbde8554285c1677e2ecc3168fd';
+const ncovcityUrl = 'https://api.tianapi.com/txapi/ncovcity/index?key=45fa3cbde8554285c1677e2ecc3168fd'
 Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
+    data: {
+        navActive: 'map',
+        navs: [{
+                name: '疫情地图',
+                value: 'map'
+            },
+            {
+                name: '实时播报',
+                value: 'broadcast'
+            },
+            {
+                name: '谣言',
+                value: 'rumour'
+            }
+        ],
+        case: [],
+        news: [],
+        desc: {},
+        updateTime: '',
+        durationTime: '',
+        ncovcity: [],
+        showCitys: {},
+        loading: false
+    },
+    isShowCity(city) {
+        console.log('city: ', city);
+    },
+    handleShowCity(e) {
+        const city = e.currentTarget.dataset.city;
+        const key = 'showCitys.' + city
         this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+            [key]: !this.data.showCitys[city]
         })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+    },
+    handleNav(e) {
+        const nav = e.currentTarget.dataset.nav;
+        this.setData({
+            navActive: nav
+        })
+    },
+    setUpdateTime() {
+        if (this.data.desc.modifyTime) {
+            const modifyTime = moment(new Date(this.data.desc.modifyTime)).format(
+                'YYYY-MM-DD HH:mm:ss'
+            )
+            this.setData({
+                updateTime: modifyTime
+            })
         }
-      })
+
+    },
+    setDurationTime() {
+        if (this.data.desc.modifyTime) {
+            const date1 = moment(new Date(), 'hh:mm')
+            const date2 = moment(new Date(this.data.desc.modifyTime), 'hh:mm')
+            const date3 = date2.diff(date1, 'minute')
+            const durationTime = moment.duration(date3, 'minutes').locale('zh-cn').humanize(true) || '';
+            this.setData({
+                durationTime: durationTime
+            })
+        }
+
+    },
+    getNcov() {
+        const self = this;
+        wx.request({
+            url: ncovUrl,
+            success(res) {
+                const data = res.data.newslist[0] || {};
+                self.setData({
+                    case: data.case || [],
+                    news: data.news || [],
+                    desc: data.desc
+                })
+                self.setUpdateTime();
+                self.setDurationTime();
+            }
+        })
+    },
+    getNcovCity(flag) {
+        const self = this;
+        wx.request({
+            url: ncovcityUrl,
+            success(res) {
+                const data = res.data.newslist || [];
+                self.setData({
+                    ncovcity: data,
+                    loading: true
+                })
+                self.initShowCity()
+                flag ? wx.stopPullDownRefresh() : wx.hideLoading()
+
+            }
+        })
+    },
+    initShowCity() {
+        const cityJson = {}
+        this.data.ncovcity.forEach(v => {
+            cityJson[v.provinceShortName] = false
+        })
+        cityJson['湖北'] = true;
+        this.setData({
+            showCitys: cityJson
+        })
+    },
+    onLoad() {
+        wx.showLoading({
+            title: '加载中...',
+        })
+        this.getNcov();
+        this.getNcovCity();
+
+    },
+    onPullDownRefresh() {
+        this.getNcov();
+        this.getNcovCity('downRefresh')
     }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
 })
