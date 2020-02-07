@@ -1,0 +1,5 @@
+
+<view class="header">
+    <image wx:if="{{ userInfo.avatarUrl }}" src="{{ userInfo.avatarUrl }}" class="avatar"></image>
+    
+</view>

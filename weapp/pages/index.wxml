@@ -1,0 +1,10 @@
+
+<view style=" {{ 'height:' + (systemInfo.windowHeight + \'px\') + ';' }}" class="container">
+    <topBar bind_init="_initComponent"></topBar>
+    <view class="content">
+        {{foods[foodIndex]}}
+    </view>
+    <view data-wpy-evt="7-47" bindtap="_proxy" class="btn">
+        Go
+    </view>
+</view>

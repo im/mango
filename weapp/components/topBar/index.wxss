@@ -1,0 +1,47 @@
+
+
+          
+                        
+                                                                                         
+                                                                    
+          
+           
+
+        
+                                 
+            
+                
+                     
+                                    
+                    
+              
+                
+                     
+          
+                 
+                   
+                            
+                                     
+                
+                         
+                          
+              
+          
+                  
+
+         
+       
+         
+                   
+.header {
+    width: 100%;
+    height: 100rpx;
+    padding: 20rpx;
+    text-align: center;
+}
+.avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+

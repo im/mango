@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "今天吃什么",
+    "navigationBarBackgroundColor": "#f9f1da",
+    "disableScroll": true,
+    "component": true,
+    "usingComponents": {
+        "topBar": "./../components/topBar/index"
+    }
+}

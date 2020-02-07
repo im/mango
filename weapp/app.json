@@ -1,0 +1,29 @@
+{
+    "pages": [
+        "pages/index",
+        "pages/demo"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "一杯芒果汁",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index",
+                "text": "",
+                "iconPath": "/static/images/tabBar/home.png",
+                "selectedIconPath": "/static/images/tabBar/selected-home.png"
+            },
+            {
+                "pagePath": "pages/demo",
+                "text": "",
+                "iconPath": "/static/images/tabBar/menu.png",
+                "selectedIconPath": "/static/images/tabBar/selected-menu.png"
+            }
+        ]
+    },
+    "usingComponents": {}
+}
