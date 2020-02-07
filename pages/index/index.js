@@ -4,7 +4,7 @@ const ncovUrl = 'https://api.tianapi.com/txapi/ncov/index?key=45fa3cbde8554285c1
 const ncovcityUrl = 'https://api.tianapi.com/txapi/ncovcity/index?key=45fa3cbde8554285c1677e2ecc3168fd'
 Page({
     data: {
-        navActive: 'broadcast',
+        navActive: 'map',
         navs: [{
                 name: '疫情地图',
                 value: 'map'
